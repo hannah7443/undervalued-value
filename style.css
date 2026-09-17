@@ -1,0 +1,29 @@
+.penny-item {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 2rem auto 0;
+}
+
+.penny-small {
+  display: block;
+  width: 64px;
+  height: auto;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.penny-header {
+  font-family: "Roboto Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  line-height: 1.4;
+  margin: 0.6rem 0 0;
+  text-align: center;
+}
