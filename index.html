@@ -41,10 +41,58 @@
   }
 </style>
 <body>
-  <div class="penny-item">
-    <img src="assets/images/penny.png" alt="Penny" class="penny-small">
-    <h3 class="penny-header">filler dream</h3>
+  <div class="penny-field" id="penny-field">
+    <div class="penny-item">
+      <div class="penny-ripple-wrap">
+        <img src="assets/gifs/slower-water-ripple.png" alt="" class="penny-ripple">
+        <img src="assets/images/penny.png" alt="Penny" class="penny-small">
+      </div>
+      <h3 class="penny-header">filler dream</h3>
+    </div>
   </div>
+
+  <form class="dream-form" id="dream-form">
+    <input
+      type="text"
+      id="dream-input"
+      class="dream-input"
+      placeholder="What are your dreams?"
+      autocomplete="off"
+      maxlength="60"
+    >
+  </form>
+
+  <script>
+    const form = document.getElementById('dream-form');
+    const input = document.getElementById('dream-input');
+    const field = document.getElementById('penny-field');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+
+      const item = document.createElement('div');
+      item.className = 'penny-item surfacing';
+      item.innerHTML = `
+        <div class="penny-ripple-wrap">
+          <img src="assets/gifs/slower-water-ripple.png" alt="" class="penny-ripple">
+          <img src="assets/images/penny.png" alt="Penny" class="penny-small">
+        </div>
+        <h3 class="penny-header"></h3>
+      `;
+      item.querySelector('.penny-header').textContent = text;
+
+      field.appendChild(item);
+      input.value = '';
+
+      // apng loops every ~1665ms; let it play twice, then sink below the water texture
+      setTimeout(() => {
+        item.classList.remove('surfacing');
+        item.classList.add('sunk');
+      }, 3330);
+    });
+  </script>
 </body>
 </html>
 

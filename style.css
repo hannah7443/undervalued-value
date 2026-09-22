@@ -1,3 +1,16 @@
+.penny-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1rem 7rem;
+}
+
+.penny-field:has(.surfacing) {
+  z-index: 2;
+}
+
 .penny-item {
   position: relative;
   z-index: 0;
@@ -6,14 +19,40 @@
   align-items: center;
   justify-content: center;
   width: fit-content;
-  margin: 2rem auto 0;
+}
+
+.penny-ripple-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+}
+
+.penny-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .penny-small {
+  position: relative;
   display: block;
   width: 64px;
   height: auto;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+  z-index: 1;
+}
+
+.penny-item.sunk .penny-ripple {
+  display: none;
 }
 
 .penny-header {
@@ -24,6 +63,36 @@
   letter-spacing: 0.08em;
   text-transform: lowercase;
   line-height: 1.4;
-  margin: 0.6rem 0 0;
+  margin: -80px 0 0;
   text-align: center;
+}
+
+.dream-form {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.dream-input {
+  font-family: "Roboto Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  width: 240px;
+  outline: none;
+  backdrop-filter: blur(4px);
+}
+
+.dream-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dream-input:focus {
+  border-color: rgba(255, 255, 255, 0.9);
 }
