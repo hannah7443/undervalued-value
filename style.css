@@ -1,24 +1,23 @@
 .penny-field {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2rem 1rem 7rem;
-}
-
-.penny-field:has(.surfacing) {
-  z-index: 2;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: auto;
 }
 
 .penny-item {
-  position: relative;
+  position: absolute;
   z-index: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: fit-content;
+  transform: translate(-50%, -50%);
+}
+
+.penny-item.surfacing {
+  z-index: 2;
 }
 
 .penny-ripple-wrap {
