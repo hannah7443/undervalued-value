@@ -66,6 +66,25 @@
   text-align: center;
 }
 
+.dim-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.dim-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.penny-item.selected {
+  z-index: 3;
+}
+
 .dream-form {
   position: fixed;
   left: 50%;

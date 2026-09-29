@@ -47,6 +47,9 @@
   <!-- Container that all generated pennies get absolutely positioned inside -->
   <div class="penny-field" id="penny-field"></div>
 
+  <!-- Dims the background when a penny is clicked, to bring it into focus -->
+  <div class="dim-overlay" id="dim-overlay"></div>
+
   <!-- Fixed input bar at the bottom where the user types a dream -->
   <form class="dream-form" id="dream-form">
     <input
@@ -63,6 +66,18 @@
     const form = document.getElementById('dream-form');
     const input = document.getElementById('dream-input');
     const field = document.getElementById('penny-field');
+    const dimOverlay = document.getElementById('dim-overlay');
+    let selectedItem = null;
+
+    function deselectPenny() {
+      if (selectedItem) {
+        selectedItem.classList.remove('selected');
+        selectedItem = null;
+      }
+      dimOverlay.classList.remove('active');
+    }
+
+    dimOverlay.addEventListener('click', deselectPenny);
 
     // Tracks where existing pennies were placed, so new ones can avoid overlapping them
     const placedPennies = []; // {x, y} centers, in px relative to penny-field
@@ -122,6 +137,17 @@
         <h3 class="penny-header"></h3>
       `;
       item.querySelector('.penny-header').textContent = text;
+
+      // Dim the background and bring this penny to the front when it's clicked
+      item.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        if (selectedItem && selectedItem !== item) {
+          selectedItem.classList.remove('selected');
+        }
+        item.classList.add('selected');
+        selectedItem = item;
+        dimOverlay.classList.add('active');
+      });
 
       // Place it at a random, non-overlapping spot and remember that spot for future pennies
       const pos = getRandomPennyPosition();
