@@ -91,6 +91,13 @@
   bottom: 1.5rem;
   transform: translateX(-50%);
   z-index: 2;
+  transition: bottom 0.9s ease, transform 0.9s ease;
+}
+
+/* Before the first penny is placed, the form sits enlarged in the center of the screen */
+.dream-form.intro {
+  bottom: 50%;
+  transform: translate(-50%, 50%);
 }
 
 .dream-input {
@@ -102,9 +109,17 @@
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
   padding: 0.6rem 1.1rem;
-  width: 240px;
+  width: 278px; /* same rendered width as the old 240px content-box */
+  box-sizing: border-box;
   outline: none;
   backdrop-filter: blur(4px);
+  transition: font-size 0.9s ease, padding 0.9s ease, width 0.9s ease;
+}
+
+.dream-form.intro .dream-input {
+  font-size: 1.25rem;
+  padding: 1rem 1.75rem;
+  width: min(440px, calc(100vw - 32px));
 }
 
 .dream-input::placeholder {

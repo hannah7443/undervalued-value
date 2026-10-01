@@ -51,12 +51,13 @@
   <div class="dim-overlay" id="dim-overlay"></div>
 
   <!-- Fixed input bar at the bottom where the user types a dream -->
-  <form class="dream-form" id="dream-form">
+  <!-- Starts centered and enlarged ("intro"); moves to the bottom after the first penny -->
+  <form class="dream-form intro" id="dream-form">
     <input
       type="text"
       id="dream-input"
       class="dream-input"
-      placeholder="What are your dreams?"
+      placeholder=""
       autocomplete="off"
       maxlength="60"
     >
@@ -68,6 +69,15 @@
     const field = document.getElementById('penny-field');
     const dimOverlay = document.getElementById('dim-overlay');
     let selectedItem = null;
+
+    // Type the placeholder prompt out one character at a time on page load
+    const PROMPT_TEXT = 'What are your dreams?';
+    let typedChars = 0;
+    const typeInterval = setInterval(() => {
+      typedChars++;
+      input.placeholder = PROMPT_TEXT.slice(0, typedChars);
+      if (typedChars >= PROMPT_TEXT.length) clearInterval(typeInterval);
+    }, 80);
 
     function deselectPenny() {
       if (selectedItem) {
@@ -165,6 +175,9 @@
 
       field.appendChild(item);
       input.value = '';
+
+      // After the first penny, move the form from the center down to its resting spot
+      form.classList.remove('intro');
     });
   </script>
 </body>
