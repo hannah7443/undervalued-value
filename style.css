@@ -124,11 +124,18 @@
   color: #ffffff;
   cursor: pointer;
   opacity: 0.85;
+  transition: opacity 0.6s ease;
 }
 
 .music-toggle:hover,
 .music-toggle:focus-visible {
   opacity: 1;
+}
+
+/* Hidden until the visitor enters their first dream, then fades in and stays */
+.music-toggle.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .music-toggle svg {
