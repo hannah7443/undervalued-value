@@ -31,58 +31,119 @@
 
 .penny-ripple {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  inset: 0;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Ripple animation */
+.ripple-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28%;
+  height: 28%;
+  box-sizing: border-box;
+  border: 5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  filter: blur(3.0px); /* soften the ring edges so they read more like water than lines */
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: ripple-ring 3.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.ripple-ring:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.ripple-ring:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes ripple-ring {
+  0% {
+    width: 28%;
+    height: 28%;
+    border-width: 5px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+    opacity: 0;
+  }
 }
 
 .penny-small {
   position: relative;
   display: block;
-  width: 64px;
+  width: 84px;
   height: auto;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
   z-index: 1;
 }
 
-.penny-item.sunk .penny-ripple {
+/* Only the most recently entered penny shows ripples; surfaced-but-older ones stay still */
+.penny-item:not(.rippling) .penny-ripple {
   display: none;
 }
 
 .penny-header {
   font-family: "Roboto Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: lowercase;
   line-height: 1.4;
-  margin: -80px 0 0;
+  margin: -115px 0 0;
   text-align: center;
+  /* Text background watercolor */
+  max-width: 220px;
+  padding: 1.6em 2.4em;
+  background-image: url("assets/images/penny-text-bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-.dim-overlay {
+/* White speaker button in the top-left corner; shows a slash through it while the music is paused */
+.music-toggle {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.dim-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.penny-item.selected {
+  top: 1rem;
+  left: 1rem;
   z-index: 3;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border: none;
+  background: none;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+  opacity: 1;
+}
+
+.music-toggle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.music-slash {
+  display: none;
+}
+
+.music-toggle.paused .music-slash {
+  display: inline;
 }
 
 .dream-form {
